@@ -1,6 +1,6 @@
 ## AirBnB clone project
 
-![hbnb logo](hbnb.logo)
+![hbnb logo](hbnb.png)
 
 1. Input the description of the project
 2. description of the command interpreter:
