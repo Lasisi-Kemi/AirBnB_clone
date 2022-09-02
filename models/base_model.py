@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
    The base_model module
 
@@ -8,6 +9,7 @@
 
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel:
@@ -19,15 +21,23 @@ class BaseModel:
 
     """
 
-    def __init__(self, name=None, my_number=None):
-        self.name = name
-        self.my_number = my_number
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            for key, val in kwargs.items():
+                if key != '__class__':
+                    if key == "created_at" or key == "updated_at":
+                        fmt = "%Y-%m-%dT%H:%M:%S.%f"
+                        val = datetime.strptime(val, fmt)
+                    setattr(self, key, val)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
+            models.storage.new(self)
 
     def __str__(self):
-        return "[BaseModel] ({}) {}".format(self.id, self.__dict__)
+        class_name = self.__class__.__name__
+        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
 
     def save(self):
         """
@@ -37,6 +47,7 @@ class BaseModel:
 
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
@@ -45,7 +56,7 @@ class BaseModel:
              of __dict__ of the instance
 
         """
-        dictionary = self.__dict__
+        dictionary = dict(self.__dict__)
         dictionary['__class__'] = self.__class__.__name__
         created_at = dictionary["created_at"]
         updated_at = dictionary["updated_at"]
