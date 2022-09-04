@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ 
     the user.py test module
 """
