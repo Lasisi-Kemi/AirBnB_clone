@@ -1,14 +1,60 @@
+
 ## AirBnB clone project
 
 ![hbnb logo](hbnb.png)
 
-First step: Write a command interpreter to manage your AirBnB objects.
-This is the first step towards building your first full web application: the AirBnB clone. This first step is very important because you will use what you build during this project with all other following projects: HTML/CSS templating, database storage, API, front-end integration…
+## INTRO
 
-Each task is linked and will help you to:
+This project is part of ALX SE Project series aiming towards cloning the [AirBnb web app](https://www.airbnb.com). 
 
-Put in place a parent class (called BaseModel) to take care of the initialization, serialization and deserialization of your future instances
-Create a simple flow of serialization/deserialization: Instance <-> Dictionary <-> JSON string <-> file
-Create all classes used for AirBnB (User, State, City, Place…) that inherit from BaseModel
-Create the first abstracted storage engine of the project: File storage.
-Create all unittests to validate all our classes and storage engine
+THis version of project implements the console to control the **file storage engine** storing the classes objects or instance amd also to manipulate the object datas easily.
+
+## Usage
+
+The console is a command line format and just like any other command line interpreter, it takes in command and perform certain action based on the command instruction.
+
+## starting the console
+clone the repo and cd into AirBnB_clone folder
+
+The console can be run:
+1. Interactively
+**E.g**
+	`./console.py`
+output:
+	`(hbnb) `
+To see a list of commands accepted in iteractive mode:
+       	 `(hbnb) help or ?`
+output:
+	`Documented commands (type help <topic>):
+	 ========================================
+	 EOF  all  create  destroy  help  quit  show  update`
+You can also type:
+        `(hbnb) help command_name to see infomation about each command`
+
+2. Non-interactively;
+E.g     `$ echo "help" | ./console.py`
+
+Output:
+	
+	`Documented commands (type help <topic>):
+         ========================================
+         EOF  all  create  destroy  help  quit  show  update`
+
+List of *classes* that can be created and updated:
+
+- BaseModel
+- User
+- Place
+- State
+- City
+- Amenity
+- Review
+
+Example:
+
+	`(hbnb) create BaseModel`
+
+Output: 
+	`49faff9a-6318-451f-87b6-910505c55907`
+
+**Note**: your own ouput may the different as the id are randomely generated
