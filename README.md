@@ -18,13 +18,18 @@ clone the repo and cd into AirBnB_clone folder
 
 The console can be run:
 1. Interactively
-**E.g**
+E.g
 	`./console.py`
+
 output:
 	`(hbnb) `
+
 To see a list of commands accepted in iteractive mode:
+
        	 `(hbnb) help or ?`
+
 output:
+
 	`Documented commands (type help <topic>):
 	 ========================================
 	 EOF  all  create  destroy  help  quit  show  update`
@@ -56,5 +61,12 @@ Example:
 
 Output: 
 	`49faff9a-6318-451f-87b6-910505c55907`
+
+
+        `(hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907`
+
+Output:
+        `[BaseModel] (49faff9a-6318-451f-87b6-910505c55907) {'first_name': 'Betty', 'id': '49faff9a-6318-451f-87b6-910505c55907', 'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'updated_at': datetime.datetime(2017, 10, 2, 3, 11, 3, 49401)}`
+
 
 **Note**: your own ouput may the different as the id are randomely generated
