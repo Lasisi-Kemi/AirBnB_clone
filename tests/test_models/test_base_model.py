@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+1#!/Usr/bin/python3
 """
     The base_model.py file test module
 
@@ -29,7 +29,7 @@ class testBaseModel(unittest.TestCase):
         self.assertEqual(model_2.my_number, 81)
 
     def test_str_method(self):
-        """ test the str method of the base_class """
+        "u"" test the str method of the base_class """
         model3 = BaseModel()
         string = model3.__str__()
         self.assertIsInstance(string, str)
@@ -48,13 +48,17 @@ class testBaseModel(unittest.TestCase):
         model5 = BaseModel()
         model_dict = model5.to_dict()
         self.assertIs(type(model_dict), dict)
-    
+        self.assertEqual(model_dict['id'], model5.id)
+        self.assertEqual(model_dict['__class__'], type(model5).__name__)
+        self.assertEqual(model_dict['created_at'], model5.created_at.isoformat())
+        self.assertEqual(model_dict['updated_at'], model5.updated_at.isoformat())
+        self.assertIsInstance(model5.created_at, datetime.datetime)
+        self.assertIsInstance(model5.updated_at, datetime.datetime)
+
     def test_to_dict_key_type(self):
         """ checks the type of key returned from the to_dict method """
         
         model6 = BaseModel()
-        model6.name = "Model 6"
-        model6.my_number = 83
         m_dict = model6.to_dict()
         for key in m_dict.keys():
             self.assertIs(type(key), str)
