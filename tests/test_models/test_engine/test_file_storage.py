@@ -9,7 +9,7 @@ import uuid
 from datetime import datetime
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
-
+from os import remove
 
 class testFileStorage(unittest.TestCase):
     """ the file storage module test class """
@@ -39,9 +39,30 @@ class testFileStorage(unittest.TestCase):
         obj_key = "BaseModel.{}".format(dic['id'])
         self.assertIsInstance(all_objs[obj_key], BaseModel)
 
-    def teste_save_method(self):
-        """ tests the filestorage save mehthod """
+    def test_file_storage_save_method(self):
+        """FileStorage save method updates __objects
+        Test if file already exists.
+        with self.assertRaises(FileNotFoundError):
+            open('file.json', 'r')
+        """
         base = BaseModel()
+        key = '{}.{}'.format(type(base).__name__, base.id)
+        base_updated_0 = base.updated_at
         storage = FileStorage()
-        key = "{}.{}".format(type(base).__name__, base.id)
-        self.assertTrue(key in storage.all())
+        objs_0 = storage.all()
+        dt_0 = objs_0[key].updated_at
+
+        base.save()
+
+        base_updated_1 = base.updated_at
+        objs_1 = storage.all()
+        dt_1 = objs_1[key].updated_at
+
+        self.assertNotEqual(base_updated_1, base_updated_0)
+        self.assertNotEqual(dt_1, dt_0)
+
+        try:
+            with open('file.json', 'r'):
+                remove('file.json')
+        except FileNotFoundError:
+            self.assertEqual(1, 2)
