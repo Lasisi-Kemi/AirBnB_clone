@@ -38,3 +38,10 @@ class testFileStorage(unittest.TestCase):
         all_objs = storage.all()
         obj_key = "BaseModel.{}".format(dic['id'])
         self.assertIsInstance(all_objs[obj_key], BaseModel)
+
+    def teste_save_method(self):
+        """ tests the filestorage save mehthod """
+        base = BaseModel()
+        storage = FileStorage()
+        key = "{}.{}".format(type(base).__name__, base.id)
+        self.assertTrue(key in storage.all())
